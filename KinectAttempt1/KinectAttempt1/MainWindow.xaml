@@ -1,0 +1,29 @@
+﻿<Window x:Class="KinectAttempt1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Width="1065" Loaded="Window_Loaded" Closing="Window_Closing" xmlns:k="http://schemas.microsoft.com/kinect/2013" xmlns:my="clr-namespace:Microsoft.Samples.Kinect.WpfViewers;assembly=Microsoft.Samples.Kinect.WpfViewers" SizeToContent="Height" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="682">
+    <Grid>
+        <Image Height="240" HorizontalAlignment="Left" Margin="40,18,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="320" />
+        <RadioButton Content="Skeleton under tracking" Height="16" HorizontalAlignment="Left" Margin="409,12,0,0" Name="radioButton1" VerticalAlignment="Top" Checked="radioButton1_Checked" />
+        <TextBox Height="26" HorizontalAlignment="Left" Margin="309,594,0,0" Name="fileNameTextBox" VerticalAlignment="Top" Width="447" />
+        <Button Content="" Height="42" HorizontalAlignment="Left" Margin="67,267,0,0" Name="recordButton" Click="recordButton_Click" ClickMode="Press" VerticalAlignment="Top" Width="70" />
+        <Ellipse Height="23" HorizontalAlignment="Left" Margin="90,276,0,0" Name="ellipse1" Stroke="Black" VerticalAlignment="Top" Width="23" Fill="#FFFB0000" />
+        <Button Content="" Height="42" HorizontalAlignment="Left" Margin="166,267,0,0" Name="stopButton" Click="stopButton_Click" VerticalAlignment="Top" Width="70" />
+        <Rectangle Height="20" HorizontalAlignment="Left" Margin="190,278,0,0" Name="rectangle1" Stroke="Black" VerticalAlignment="Top" Width="22" Fill="Black" />
+        <Label Content="File Name:" Height="28" HorizontalAlignment="Left" Margin="226,594,0,0" Name="label1" VerticalAlignment="Top" Width="77" />
+        <TextBox Height="89" HorizontalAlignment="Left" Margin="95,437,0,0" Name="commentBox" VerticalAlignment="Top" Width="276" />
+        <Label Content="Comments:" Height="27" HorizontalAlignment="Left" Margin="9,441,0,0" Name="label2" VerticalAlignment="Top" Width="80" />
+        <Image Height="515" HorizontalAlignment="Left" Margin="407,43,0,0" Name="skeletonImage" Stretch="Fill" VerticalAlignment="Top" Width="624" />
+        <Button Content="" Height="42" HorizontalAlignment="Left" Margin="263,267,0,0" Name="movieButton" VerticalAlignment="Top" Width="70" Click="movieButton_Click" ClickMode="Press" />
+        <Image Height="27" HorizontalAlignment="Left" Margin="282,275,0,0" Name="image2" Stretch="Fill" VerticalAlignment="Top" Width="33" Source="/KinectAttempt1;component/Images/video-icon.gif" OpacityMask="{x:Null}" Opacity="0.5"></Image>
+        <Label Content="Age:" Height="27" HorizontalAlignment="Left" Margin="12,331,0,0" Name="label3" VerticalAlignment="Top" Width="80" />
+        <TextBox Height="27" HorizontalAlignment="Left" Margin="52,333,0,0" Name="ageBox" VerticalAlignment="Top" Width="60" />
+        <Label Content="Dyskinesia severity:" Height="27" HorizontalAlignment="Left" Margin="150,331,0,0" Name="label4" VerticalAlignment="Top" Width="119" />
+        <TextBox Height="27" HorizontalAlignment="Left" Margin="263,333,0,0" Name="severityBox" VerticalAlignment="Top" Width="115" />
+        <Label Content="Record quality:" Height="27" HorizontalAlignment="Left" Margin="12,364,0,0" Name="label5" VerticalAlignment="Top" Width="101" />
+        <TextBox Height="27" HorizontalAlignment="Left" Margin="128,364,0,0" Name="qualityBox" VerticalAlignment="Top" Width="219" />
+        <Label Content="Bad detection in joints:" Height="27" HorizontalAlignment="Left" Margin="12,397,0,0" Name="label6" VerticalAlignment="Top" Width="132" />
+        <TextBox Height="27" HorizontalAlignment="Left" Margin="150,397,0,0" Name="badDetectionBox" VerticalAlignment="Top" Width="219" />
+        <Button Content="Flush Comments" Height="33" HorizontalAlignment="Left" Margin="143,539,0,0" Name="flushCommentsButton" Click="flushCommentsButton_Click" ClickMode="Press" VerticalAlignment="Top" Width="163" />
+    </Grid>
+</Window>
