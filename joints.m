@@ -20,6 +20,8 @@ classdef joints
         KNEERIGHT = 18;
         ANKLERIGHT = 19;
         FOOTRIGHT = 20;
+        
+        TORSO = [11 12 13 17];
     end
     
     methods

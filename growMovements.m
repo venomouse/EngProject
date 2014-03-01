@@ -1,14 +1,17 @@
-function [chainLengths, chainDistances, chainNumbers, chainTable, vectorLengths] = growMovements(data )
+function [chainLengths, chainDistances, chainNumbers, chainTable, vectorLengths] = growMovements(data, sampleLength)
 %GROWMOVEMENTS This function aims to find sequences of consistent movements
 % in a joint recording 
 
 numPoints = size (data,1);
-angleThreshold = 90;
+angleThreshold = 100;
 historyLength = 8;
 
 
 motionVectors = data(2:end,:) - data(1:end-1,:);
 vectorLengths = sqrt(sum(motionVectors.^2,2));
+jumpIndex = zeros(size(vectorLengths));
+jumpThreshold = 0.008;
+jumpIndex(vectorLengths > jumpThreshold) = 1;
 
 angle = @(x,y) acosd(x*y'/(norm(x,2)*norm(y,2)));
 
@@ -24,11 +27,38 @@ chainNumbers(2) = 1;
 currChainStart = 1;
 currChainNum = 1;
 currChainDistance = vectorLengths(1);
-currChainLength = 1; 0;
+currChainLength = 1; 
 
+measNum = 1;
 for i = 2:numPoints - 1
+    if (measNum > sampleLength)
+        break;
+    end
+    
     currVec = motionVectors(i,:);
     historyStart = max(currChainStart, i - historyLength);
+    if (jumpIndex(i) ==0)
+        if (jumpIndex(i-1) ==1)
+            %start new chain
+            currChainStart = i;
+            currChainLength = 0;
+            currChainNum = currChainNum+1;
+            currChainDistance = 0;
+            measNum = measNum + 1;
+            continue;
+        end
+    else
+        chainLengths(i) = 0;
+        chainDistances(i) = 0;
+        chainNumbers(i) = 0;
+        if (jumpIndex(i-1) == 0)
+                %add the current chain to the table
+                chainTable = [chainTable; currChainNum, currChainStart, i-1, currChainLength, currChainDistance];
+                continue;
+        else 
+           continue;
+        end
+    end
     for j = historyStart:i-1
         theta = angle (currVec, motionVectors(j,:));
         if ( theta < angleThreshold)
@@ -47,6 +77,7 @@ for i = 2:numPoints - 1
     currChainDistance = currChainDistance + vectorLengths(i);
     chainDistances(i) = currChainDistance;
     chainNumbers(i+1) = currChainNum;    
+    measNum = measNum + 1;
 end
 
 minChainForCat = 10;

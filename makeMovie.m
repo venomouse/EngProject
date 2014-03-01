@@ -1,8 +1,11 @@
 function [frames] =  makeMovie (data, reliabilityMatrix, sticky, firstFrame, lastFrame)
-if (nargin <3)
+if (nargin <2)
     reliabilityMatrix = zeros(size(data));
-    sticky = false;
    
+end
+
+if (nargin < 3)
+    sticky = false;
 end
 
 if (nargin< 4)
