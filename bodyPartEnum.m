@@ -5,6 +5,7 @@ classdef bodyPartEnum
         NUMOFLIMBS = 5;
         NUMOFJOINTS = 20;
         
+        NONE = 0;
         HEAD = 1;
         RIGHTHAND = 2;
         LEFTHAND = 3;

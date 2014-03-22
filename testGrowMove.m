@@ -1,8 +1,12 @@
-function [chainLengths, chainDistances, chainNumbers, chainTable] =  testGrowMove(data)
+function [chainLengths, chainDistances, chainNumbers, chainTable] =  testGrowMove(data, jumpIndex)
 %TESTGROWMOVE Summary of this function goes here
 %   Detailed explanation goes here
 
-[chainLengths, chainDistances, chainNumbers, chainTable] = growMovements(data, 150);
+
+if (nargin < 2)
+    jumpIndex = zeros(size(data,1));
+end
+[chainLengths, chainDistances, chainNumbers, chainTable] = growMovements(data, jumpIndex);
 numChains = max(chainNumbers);
 thresholdLength = 7;
 colors = {'r.','g.','k.','y.','c.','m.'};

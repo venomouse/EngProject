@@ -1,5 +1,7 @@
 classdef joints
     properties (Constant)
+        NUM_OF_JOINTS = 20;
+        
         HEAD = 1;
         SHOULDERCENTER = 2;
         SHOULDERLEFT = 3;

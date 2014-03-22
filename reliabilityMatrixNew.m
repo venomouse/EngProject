@@ -17,7 +17,7 @@ jointReliabilityThresh = 0.5;
 for i = 1:indexConstants.NUMOFJOINTS
    jointData = data(:,3*i-2:3*i);
    errorScore = zeros(1, size(jointData,1));
-   distances = [0; sqrt(sum((jointData(1:end-1,:) - jointData(2:end,:)).^2,2))];
+   distances = [ sqrt(sum((jointData(1:end-1,:) - jointData(2:end,:)).^2,2));0];
    if (~ismember (i, movingJoints))
        for t = 1:numPoints
             if (distances(t) > distThresh)
@@ -34,7 +34,7 @@ for i = 1:indexConstants.NUMOFJOINTS
        
    end
    
-    if (nnz(relMat(:,i) > jointReliabilityThresh))
+    if ((nnz(relMat(:,i)/length(relMat(:,i))) > jointReliabilityThresh))
         jointReliability(i) = 1;
     end
 end
