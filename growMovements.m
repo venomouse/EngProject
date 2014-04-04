@@ -17,14 +17,22 @@ vectorLengths =  sqrt(sum(motionVectors.^2,2));
 
 angle = @(x,y) acosd(x*y'/(norm(x,2)*norm(y,2)));
 
-chainTable = [];
+chainTable = zeros(0,5);
 chainLengths = zeros (1, numPoints-1);
-chainLengths(1) = 1; 
 chainDistances = zeros (1, numPoints -1);
-chainDistances(1) = vectorLengths(1);
 chainNumbers = zeros (1,numPoints); 
+
+if (length(vectorLengths) < 1)
+    return;
+end
+
+
+chainLengths(1) = 1; 
+chainDistances(1) = vectorLengths(1);
 chainNumbers(1) = 1;
 chainNumbers(2) = 1;
+
+
 
 currChainStart = 1;
 currChainNum = 1;

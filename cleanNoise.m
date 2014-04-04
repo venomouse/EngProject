@@ -24,8 +24,13 @@ switch (movingLimb)
     case (bodyPartEnum.NONE)
         movingJoints = [];
 end
-
+try
 [relMat, jointReliability] = reliabilityMatrixNew(clip, movingJoints);
+catch exception
+   clipName
+     exception
+end
+
 
 allBodyData = repmat(struct('data', [],'frameNums', [], 'jumpVector', [], 'isReliable', 0, 'name', ' '), 1,  indexConstants.NUMOFJOINTS);
 
@@ -49,6 +54,7 @@ for i = 1:indexConstants.NUMOFJOINTS
    allBodyData(i).jumpVector = jumpVector;
    allBodyData(i).isReliable = 1- jointReliability(i);
    allBodyData(i).name = clipName;
+   allBodyData(i).movingLimb = movingLimb;
 end
 
 end
