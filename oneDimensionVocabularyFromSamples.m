@@ -1,4 +1,4 @@
-function [ featureList, grades ] = oneDimensionVocabularyFromSamples( samples, numOfGrades )
+function [ featureList, grades ] = oneDimensionVocabularyFromSamples(samples, numOfGrades )
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -15,6 +15,8 @@ for i = 1:numOfSamples
 end
 
 [IDX,grades] = kmeans(featureList, numOfGrades);
+
+grades = sort(grades)';
 
 % figure()
 % [h, cent] = hist (featureList,100);

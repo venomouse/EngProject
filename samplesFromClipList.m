@@ -1,8 +1,8 @@
-function [ samples ] = samplesFromClipList(clips, neededJoint, sampleLength)
+function [ sampleClips ] = samplesFromClipList(clips, neededJoint, sampleLength, overlapSize)
 %UNTITLED10 Summary of this function goes here
 %   Detailed explanation goes here
 
- samples = [];
+ sampleClips = cell(0);
 for i = 1:length(clips)
     clip= evalin ('base', clips{i});
     
@@ -12,13 +12,13 @@ for i = 1:length(clips)
         movingLimb = bodyPartEnum.RIGHTHAND;
     end
     
-    allBodyData = cleanNoise(clip, clips{i}, movingLimb);
-    if (movingLimb == -1)
-        currSamples = allBodySamplesFromClip(allBodyData, )
+    allBodyData = cleanNoise(clip, movingLimb, clips{i});
+    if (neededJoint == -1)
+        currSamples = allBodySamplesFromClip(allBodyData,sampleLength, overlapSize );
     else
         currSamples = jointSamplesFromClip(allBodyData, neededJoint, sampleLength);
     end
-    samples = [samples, currSamples];
+    sampleClips{i} =  currSamples;
     
 end
 
