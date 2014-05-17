@@ -1,0 +1,12 @@
+load patient2_dyskinetic_clips_sit
+load patient2_dyskinetic_clips_stand
+load patient4_normal_clips_stand
+load patient4_normal_clips_sit
+load patient6_finger_handopen
+load patient6e_finger_handopen
+load patient7a_finger_handopen
+load patient7c_finger_handopen
+load patient8_finger_handopen
+load patient10a_finger_handopen
+load patient11_finger_handopen
+load me_finger_handopen

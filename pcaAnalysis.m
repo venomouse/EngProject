@@ -1,4 +1,4 @@
-function [data_lowerDim] = pcaAnalysis(data_matrix, num_retain)
+function [data_lowerDim, vecRetained, meanMatrix] = pcaAnalysis(data_matrix, num_retain)
 %UNTITLED8 Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -8,6 +8,7 @@ eigVals = diag (eigValCov);
 
 vecRetained = eigVecCov (:, index (end - num_retain+1:end));
 
+meanMatrix = mean (data_matrix,2);
 data_lowerDim = vecRetained' * (data_matrix - repmat (mean (data_matrix,2), 1, size (data_matrix ,2)));
 
 end

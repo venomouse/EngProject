@@ -13,6 +13,9 @@ for i = 1:numClips
     scores(i) = nnz(labels(ind) == 1)/length(ind);
     amounts(1,i) = nnz(labels(ind) == 1);
     amounts(2,i) = length(ind);
+    if (isnan(scores(i)))
+        scores(i) = [];
+    end
 end
 
 end
