@@ -17,7 +17,12 @@ for i = 1:length(sampleClipsList)
         clipMatrix = [clipMatrix, featureVec'];
         clipIndex = [clipIndex; i,j];
     end
-    clipMatrix = correctMissingAverage(clipMatrix);
+    
+    if(~isequal(vectorFcn, @bodyBoWFeatureVector) && ~isequal(vectorFcn, @bodyBoWFeatureVectorShort))
+        clipMatrix = correctMissingAverage(clipMatrix);
+    else
+        clipMatrix = correctMissingBoW(clipMatrix);
+    end
     data_matrix = [data_matrix, clipMatrix];
     clip_matrix{i} = clipMatrix;
 end

@@ -10,7 +10,9 @@ amounts = zeros(2, numClips);
 
 for i = 1:numClips
     ind = find(clipIndex(:,1) == i);
-    scores(i) = nnz(labels(ind) == 1)/length(ind);
+    labels(labels == -1) = 0;
+    scores(i) = mean(labels(ind));
+   % scores(i) = nnz(labels(ind) == 1)/length(ind);
     amounts(1,i) = nnz(labels(ind) == 1);
     amounts(2,i) = length(ind);
     if (isnan(scores(i)))

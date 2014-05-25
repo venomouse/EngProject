@@ -1,6 +1,5 @@
 function [clipVectorMat ] = correctMissingAverage( clipVectorMat )
-%CORRECTMISSINGAVERAGE Summary of this function goes here
-%   Detailed explanation goes here
+%CORRECTMISSINGAVERAGE corrects vectors that 
 
 for i = 1:size(clipVectorMat,1)
     jointScores = clipVectorMat(i,:);

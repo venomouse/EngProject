@@ -12,7 +12,11 @@ function [featureVector ] = jointFeatureVector(jointStruct, binCenters )
     featureVector = hist(meaningfulFeatures, binCenters)';
     featureVector = [smallFeatureNum; featureVector];
     
-    featureVector = featureVector/sum(featureVector);
+%     if (sum(featureVector) ~=0)
+         featureVector = featureVector/sum(featureVector);
+%     else
+%         featureVector
+%     end
     
 
 end

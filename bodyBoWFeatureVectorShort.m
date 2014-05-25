@@ -1,4 +1,4 @@
-function [ BoW ] = bodyBoWFeatureVector( allBodySample, sampleSize )
+function [ BoW ] = bodyBoWFeatureVectorShort( allBodySample, sampleSize )
 %BODYBOWFEATUREVECTOR Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -35,21 +35,15 @@ switch (movingLimb)
         featureVectorJoints(OPPOSITE_ANKLE) = joints.ANKLERIGHT;
 end
 
-BoW = zeros(1, classification.BOW_NUM_OF_JOINTS*numOfGrades);
+BoW = zeros(1, classification.BOW_NUM_OF_JOINTS*(numOfGrades-1));
 
 index = 1;
 for j = featureVectorJoints
     jointFeatureVec = jointFeatureVector(allBodySample(j), bodyGrades(j,:));
-    wordIndices = (0:numOfGrades - 1)*classification.BOW_NUM_OF_JOINTS + index;
-    BoW(wordIndices) = jointFeatureVec(2:end);
+    wordIndices = (0:numOfGrades - 2)*classification.BOW_NUM_OF_JOINTS + index;
+    BoW(wordIndices) = jointFeatureVec(3:end);
     index = index+1;
 end
 
 
-
-
-
-
-
 end
-

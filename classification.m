@@ -11,8 +11,8 @@ classdef classification
         AVERAGE_LOWER_FEATURE_VECTOR_LENGTH = 4;
         AVERAGE_LOWER_FEATURE_VECTOR_LENGTH_WITH_FOOT = 6;
         
-        BOW_NUM_OF_JOINTS = 6;
-        BOW_NUM_OF_WORDS = 18;
+        BOW_NUM_OF_JOINTS = 7;
+        BOW_NUM_OF_WORDS = 21;
     end
     
     methods

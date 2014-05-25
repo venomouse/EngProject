@@ -66,10 +66,11 @@ load me_finger_handopen
 
 vars = who;
 
-patients = {'patient2', 'patient4', 'patient6np', 'patient6b', 'patient6d', 'patient6e', 'patient7a', 'patient7c', 'patient8', 'patient10a', 'patient11', 'me'};
+patients = {'patient2', 'patient4', 'patient6np', 'patient6b', 'patient6d', 'patient6e', 'patient7a', 'patient7c', 'patient8', 'patient10a', 'patient11', 'me', 'patient6am'};
 %demo
 %patients = {'patient2', 'patient6np'};
 labels = [1, 0, 1,1,1,1,0,1,0,0,0,0]
+aims_grades = [1 0 2 2 2 1 0 2 0 1 0 0 0 3]
 dyskinetic_patients = [1,3,4,5,6,8];
 normal_patients = [2,7,9,10,11,12];
 num_retain = 3;
@@ -93,6 +94,7 @@ for i = 1:length(vars)
     patient_label(10) = ~isempty(strfind(vars{i}, 'patient10a'));
     patient_label(11) = ~isempty(strfind(vars{i}, 'patient11'));
     patient_label(12) = ~isempty(strfind(vars{i}, 'healthy'));
+     patient_label(12) = ~isempty(strfind(vars{i}, 'patient6am'));
     posture_label = ~isempty(strfind(vars{i}, 'sit'));
     movement_label = ~isempty(strfind(vars{i}, 'finger'))|| ~isempty(strfind(vars{i}, 'handopen')); 
     
