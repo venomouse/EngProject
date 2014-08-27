@@ -1,21 +1,16 @@
-load forDemonstration1
+load demonstration_data
 
-%dataFile = patient6am_afterMed_sit_handopen_left;
 
-skeletonCoords = patient6c_sit_finger_right_skelCoords;
+skeletonCoords = demonstration_finger_right_mild_long_skelcoords;
 firstFrame = 1;
-lastFrame = 400 %size(skeletonCoords,1);
+lastFrame = 950 %size(skeletonCoords,1);
 visible = true;
 
 
 movingMat =zeros (lastFrame, 20);% movingMatrix(dataFile, 'patient6b_sit_finger_left', 0.01);
-%movingMat(1:90, joints.FOOTLEFT) = 1;
-%movingMat(1:40, joints.FOOTRIGHT) = 1;
-%movingMat(end-20:end, joints.HANDLEFT) = 1;
-movingMat(:, joints.HANDLEFT) =0;
 
-clipLabels = -1*ones(1, 16);
-%clipLabels = labels{10}(1:10);
+clipLabels = demonstration_finger_right_mild_long_labels;
+%clipLabels = -1*ones(1,20);
 clipLabels(clipLabels == -1) = 0.05;
 numChunks = length(clipLabels);
 t = 25/30: 25/30 : ((numChunks)*25)/30;

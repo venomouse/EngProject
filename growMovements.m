@@ -51,6 +51,7 @@ for i = 2:numPoints - 1
         currChainNum = currChainNum+1;
         currChainDistance = 0;
         chainDistances(i) = currChainDistance;
+        chainNumbers(i+1) = 0;
         continue;
     end
     

@@ -13,8 +13,10 @@ function [ avScoreFeatureVector] = averageMotionFeatureVector( allBodySample, sa
    OPPOSITE_KNEE = 8;
    SAMESIDE_ANKLE = 9;
    OPPOSITE_ANKLE = 10;
+   SAMESIDE_FOOT = 11;
+   OPPOSITE_FOOT = 12;
 
-   featureVectorJoints = zeros(1, 10);
+   featureVectorJoints = zeros(1, classification.AVERAGE_MOVEMENT_VECTOR_LENGTH);
    featureVectorJoints(HEAD) = 1;
    movingLimb = allBodySample(1).movingLimb; 
    
@@ -26,9 +28,11 @@ function [ avScoreFeatureVector] = averageMotionFeatureVector( allBodySample, sa
         featureVectorJoints(SAMESIDE_HIP) = joints.HIPRIGHT;
         featureVectorJoints(SAMESIDE_KNEE) = joints.KNEERIGHT;
         featureVectorJoints(SAMESIDE_ANKLE) = joints.ANKLERIGHT;
+        featureVectorJoints(SAMESIDE_FOOT) = joints.FOOTRIGHT;
         featureVectorJoints(OPPOSITE_HIP) = joints.HIPLEFT;
         featureVectorJoints(OPPOSITE_KNEE) = joints.KNEELEFT;
         featureVectorJoints(OPPOSITE_ANKLE) = joints.ANKLELEFT;
+        featureVectorJoints(OPPOSITE_FOOT) = joints.FOOTLEFT;
     case (bodyPartEnum.LEFTHAND)
         featureVectorJoints(OPPOSITE_SHOULDER) = joints.SHOULDERIGHT;
         featureVectorJoints(OPPOSITE_ELBOW) = joints.ELBOWRIGHT;
@@ -36,9 +40,11 @@ function [ avScoreFeatureVector] = averageMotionFeatureVector( allBodySample, sa
         featureVectorJoints(SAMESIDE_HIP) = joints.HIPLEFT;
         featureVectorJoints(SAMESIDE_KNEE) = joints.KNEELEFT;
         featureVectorJoints(SAMESIDE_ANKLE) = joints.ANKLELEFT;
+        featureVectorJoints(SAMESIDE_FOOT) = joints.FOOTLEFT;
         featureVectorJoints(OPPOSITE_HIP) = joints.HIPRIGHT;
         featureVectorJoints(OPPOSITE_KNEE) = joints.KNEERIGHT;
         featureVectorJoints(OPPOSITE_ANKLE) = joints.ANKLERIGHT;
+        featureVectorJoints(OPPOSITE_FOOT) = joints.FOOTRIGHT;
     end
 
 avScoreFeatureVector = zeros (1, classification.AVERAGE_MOVEMENT_VECTOR_LENGTH);

@@ -6,13 +6,13 @@ load clipMaps;
 sampleLength = 50;
 overlapLength = 25;
 movement = {'finger', 'handopen'};
-posture = {'stand'};
+posture = {'sit'};
 pca = true;
 num_retain = 3;
 grade_type = Patient.AIMS_OVERALL;
-vectorType = @averageMotionFeatureVector;
+vectorType = @averageMotionFeatureVectorForStatistics;
 
-map = standingFSClipMap;
+map = sittingFSClipMap;
 
 dyskinetic_train = {'patient6am'};
 normal_train = {'patient6c'};
@@ -32,23 +32,16 @@ normal_clip_list = combineClipList(vars, normal_train, posture, movement);
 [svmStruct, eigVectors, meanMatrix] = trainClassifier_customFcn(dyskinetic_clip_list, normal_clip_list, sampleLength, overlapLength,vectorType,pca,num_retain);
 
 %%
+
 clearvars -except svmStruct sampleLength overlapLength ...
     eigVectors meanMatrix map pca grade_type vectorType ...
     posture movement
 
-%test on all patients
-patients = keys(map);
-aims_grades = zeros(size(patients));
 
-for i = 1:length(patients)
-    aims_grades(i) = map(patients{i}).aims(grade_type);
-    eval (['load ' map(patients{i}).fileName]);
-end
+load 15_6_demonstration_long  
+posture = {'_'};
 
-true_labels = aims_grades > 0;
-dyskinetic_patients = find(aims_grades >0);
-normal_patients = find (aims_grades == 0);
-
+patients = {'mild'};
 vars = who;
 clip_lists = cell(size(patients));
 for i =1:length(patients)
@@ -70,21 +63,3 @@ for i = 1:length(patients)
     clip_scores{i} = scoreClipsByBits(clip_indices{i}, labels{i});
     grades(i) = mean (clip_scores{i});
 end
-
-%%
-[FPR,TPR] = ROC(grades, true_labels);
-
-grc = gradeRankCorr(grades, aims_grades)
-
-%%
-figure();
-hold on;
-for j = 1:length(patients)
-   data = lower_dims{j};
-   if (ismember(j, dyskinetic_patients))
-       scatter3 (data(1,:), data (2,:), data(3,:), 'b'); 
-   else
-        scatter3 (data(1,:), data (2,:), data(3,:), 'g');
-   end
-end
-

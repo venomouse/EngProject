@@ -6,25 +6,27 @@ load clipMaps;
 sampleLength = 50;
 overlapLength = 25;
 movement = {'finger', 'handopen'};
-posture = {'stand'};
+posture = {'sit'};
 pca = true;
 num_retain = 3;
 grade_type = Patient.AIMS_OVERALL;
-vectorType = @bodyBoWFeatureVector;
+vectorType = @averageMotionFeatureVector;
 
-map = standingFSClipMap;
+map = sittingFSClipMap;
 
-strong_dyskinetic_train = {'patient6am'};
-weak_dyskinetic_train = {'patient6d'};
+strong_dyskinetic_train = {'strong'};
+weak_dyskinetic_train = {'weak'};
 normal_train = {'patient6c'};
 
-for i = 1:length(strong_dyskinetic_train);
-    eval (['load ' map(strong_dyskinetic_train{i}).fileName]);
-end
+load cascade_training
 
-for i = 1:length(weak_dyskinetic_train);
-    eval (['load ' map(weak_dyskinetic_train{i}).fileName]);
-end
+% for i = 1:length(strong_dyskinetic_train);
+%     eval (['load ' map(strong_dyskinetic_train{i}).fileName]);
+% end
+% 
+% for i = 1:length(weak_dyskinetic_train);
+%     eval (['load ' map(weak_dyskinetic_train{i}).fileName]);
+% end
 
 for i = 1:length(normal_train);
     eval (['load ' map(normal_train{i}).fileName]);

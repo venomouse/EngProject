@@ -1,4 +1,4 @@
-function [ output_args ] = presentationFrame( img, skeletonCoord, imgNum, visible, chunkLabels, timePercentage, t, croppedT);
+function [ output_args ] = presentationFrame( img, skeletonCoord,movingJoints, imgNum, visible, chunkLabels, timePercentage, t, croppedT);
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -36,31 +36,50 @@ subplot (2,5, [1 2 3 6 7 8])
 blurred_img = blurFaceOnImage(img, head);
 im = imshow(blurred_img);
 axesHandle = gca;
-set (axesHandle, 'Position', [0.01 0.01 0.6 1]);
+set (axesHandle, 'Position', [0.01 0.01 0.57 1]);
 coords = [head;shoulderCenter; leftShoulder;leftElbow; leftWrist; leftHand; ...
     rightShoulder; rightElbow; rightWrist; rightHand; spine; hipCenter;
     hipLeft; kneeLeft; ankleLeft; footLeft; hipRight; kneeRight; ankleRight; footRight];
 hold on;
-plot (axesHandle,[head(1); shoulderCenter(1)],[head(2); shoulderCenter(2)],'LineWidth', 2);
-plot (axesHandle,[leftShoulder(1), shoulderCenter(1)],[leftShoulder(2), shoulderCenter(2)], 'LineWidth', 2);
-plot (axesHandle,[rightShoulder(1), shoulderCenter(1)],[rightShoulder(2), shoulderCenter(2)], 'LineWidth', 2);
-plot (axesHandle,[leftShoulder(1), leftElbow(1)],[leftShoulder(2), leftElbow(2)], 'LineWidth', 2);
-plot (axesHandle,[leftWrist(1), leftElbow(1)],[leftWrist(2), leftElbow(2)],'LineWidth', 2);
-plot (axesHandle,[leftWrist(1), leftHand(1)],[leftWrist(2), leftHand(2)], 'LineWidth', 2);
-plot (axesHandle,[rightShoulder(1), rightElbow(1)],[rightShoulder(2), rightElbow(2)], 'LineWidth', 2);
-plot (axesHandle,[rightWrist(1), rightElbow(1)],[rightWrist(2), rightElbow(2)], 'LineWidth', 2);
-plot (axesHandle,[rightWrist(1), rightHand(1)],[rightWrist(2), rightHand(2)], 'LineWidth', 2);
-plot (axesHandle,[spine(1), shoulderCenter(1)],[spine(2), shoulderCenter(2)], 'LineWidth', 2);
-plot (axesHandle,[spine(1), hipCenter(1)],[spine(2), hipCenter(2)], 'LineWidth', 2);
-plot (axesHandle,[hipLeft(1), hipCenter(1)],[hipLeft(2), hipCenter(2)], 'LineWidth', 2);
-plot (axesHandle,[hipLeft(1), kneeLeft(1)],[hipLeft(2), kneeLeft(2)], 'LineWidth', 2);
-plot (axesHandle,[kneeLeft(1), ankleLeft(1)],[kneeLeft(2), ankleLeft(2)], 'LineWidth', 2);
-plot (axesHandle,[footLeft(1), ankleLeft(1)],[footLeft(2), ankleLeft(2)], 'LineWidth', 2);
-plot (axesHandle,[hipRight(1), hipCenter(1)],[hipRight(2), hipCenter(2)],  'LineWidth', 2);
-plot (axesHandle,[hipRight(1), kneeRight(1)],[hipRight(2), kneeRight(2)],  'LineWidth', 2);
-plot (axesHandle,[kneeRight(1), ankleRight(1)],[kneeRight(2), ankleRight(2)],  'LineWidth', 2);
-plot (axesHandle,[footRight(1), ankleRight(1)],[footRight(2), ankleRight(2)],  'LineWidth', 2);
-
+plot (axesHandle,[head(1); shoulderCenter(1)],[head(2); shoulderCenter(2)],'LineWidth', 1.5);
+plot (axesHandle,[leftShoulder(1), shoulderCenter(1)],[leftShoulder(2), shoulderCenter(2)], 'LineWidth', 1.5);
+plot (axesHandle,[rightShoulder(1), shoulderCenter(1)],[rightShoulder(2), shoulderCenter(2)], 'LineWidth', 1.5);
+plot (axesHandle,[leftShoulder(1), leftElbow(1)],[leftShoulder(2), leftElbow(2)], 'LineWidth', 1.5);
+plot (axesHandle,[leftWrist(1), leftElbow(1)],[leftWrist(2), leftElbow(2)],'LineWidth', 1.5);
+if (movingJoints(joints.HANDLEFT) == 1)
+    plot (axesHandle,[leftWrist(1), leftHand(1)],[leftWrist(2), leftHand(2)],'r',  'LineWidth', 1.5);
+else
+    plot (axesHandle,[leftWrist(1), leftHand(1)],[leftWrist(2), leftHand(2)], 'LineWidth', 1.5);
+end
+plot (axesHandle,[rightShoulder(1), rightElbow(1)],[rightShoulder(2), rightElbow(2)], 'LineWidth', 1.5);
+plot (axesHandle,[rightWrist(1), rightElbow(1)],[rightWrist(2), rightElbow(2)], 'LineWidth', 1.5);
+plot (axesHandle,[rightWrist(1), rightHand(1)],[rightWrist(2), rightHand(2)], 'LineWidth', 1.5);
+plot (axesHandle,[spine(1), shoulderCenter(1)],[spine(2), shoulderCenter(2)], 'LineWidth', 1.5);
+plot (axesHandle,[spine(1), hipCenter(1)],[spine(2), hipCenter(2)], 'LineWidth', 1.5);
+plot (axesHandle,[hipLeft(1), hipCenter(1)],[hipLeft(2), hipCenter(2)], 'LineWidth', 1.5);
+plot (axesHandle,[hipLeft(1), kneeLeft(1)],[hipLeft(2), kneeLeft(2)], 'LineWidth',  1.5);
+if (movingJoints(joints.ANKLELEFT) == 1)
+    plot (axesHandle,[kneeLeft(1), ankleLeft(1)],[kneeLeft(2), ankleLeft(2)], 'r', 'LineWidth', 1.5);
+else
+    plot (axesHandle,[kneeLeft(1), ankleLeft(1)],[kneeLeft(2), ankleLeft(2)], 'LineWidth', 1.5);
+end
+if (movingJoints(joints.FOOTLEFT) == 1)
+    plot (axesHandle,[footLeft(1), ankleLeft(1)],[footLeft(2), ankleLeft(2)],'r', 'LineWidth', 1.5);
+else    
+    plot (axesHandle,[footLeft(1), ankleLeft(1)],[footLeft(2), ankleLeft(2)], 'LineWidth', 1.5);
+end
+plot (axesHandle,[hipRight(1), hipCenter(1)],[hipRight(2), hipCenter(2)],  'LineWidth', 1.5);
+plot (axesHandle,[hipRight(1), kneeRight(1)],[hipRight(2), kneeRight(2)],  'LineWidth', 1.5);
+if (movingJoints(joints.ANKLERIGHT) == 1)
+    plot (axesHandle,[kneeRight(1), ankleRight(1)],[kneeRight(2), ankleRight(2)],'r',   'LineWidth', 1.5);
+else
+    plot (axesHandle,[kneeRight(1), ankleRight(1)],[kneeRight(2), ankleRight(2)],  'LineWidth', 1.5);
+end
+if (movingJoints(joints.FOOTRIGHT))
+    plot (axesHandle,[footRight(1), ankleRight(1)],[footRight(2), ankleRight(2)],'r',  'LineWidth', 1.5);
+else
+    plot (axesHandle,[footRight(1), ankleRight(1)],[footRight(2), ankleRight(2)],  'LineWidth', 1.5);
+end
 plot (axesHandle, coords(:,1), coords(:,2), 'r.', 'MarkerSize', 12);
 
 hold off;
@@ -68,15 +87,31 @@ hold off;
 subplot (2,5, [4,5])
 set (gca, 'Position', [0.64 0.6 0.34 0.25]);
  
+redPlot = chunkLabels;
+redPlot(chunkLabels <1 ) = 0;
+bluePlot = chunkLabels;
+bluePlot(chunkLabels ==1) = 0;
+hold on;
+bar (t, redPlot, 'r');
+bar (t, bluePlot, 'b');
 
-bar (t, chunkLabels);
-axis ([0 t(end)+0.5 -0.25 1.25])
+axis ([0 t(end)+0.5 -0.1 1.1])
+x = xlabel('Time, sec');
+set(x, 'FontSize', 14);
+y = ylabel('Chunk Label');
+set(y, 'FontSize', 14)
 
 subplot(2,5, [9,10])
 set (gca, 'Position', [0.64 0.15 0.34 0.25]);
-plot (croppedT, timePercentage);
+plot (croppedT, timePercentage, 'LineWidth', 3);
 axis ([0 t(end)+0.5 -0.25 1.25])
-text(1, 0.3, num2str(timePercentage(end)), 'Fontsize',18);
+text(1, 0.5, num2str(timePercentage(end)), 'Fontsize',18);
+x = xlabel('Time, sec');
+set(x, 'FontSize', 14);
+y = ylabel('Dyskinetic chunk percentage');
+set(y, 'FontSize',14)
+
+
 
  imgName = ['presentationFrame_' num2str(imgNum,'%04d')];
  print('-dpng', '-r200', imgName);
